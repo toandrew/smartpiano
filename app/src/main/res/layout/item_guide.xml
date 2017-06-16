@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guide_bg3">
+
+    <ImageView
+        android:id="@+id/iv_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/btn_guide"
+        android:layout_width="500px"
+        android:layout_height="150px"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100px"
+        android:background="@drawable/selector_blue_button_background"
+        android:text="@string/try_right_now"
+        android:gravity="center"
+        android:textColor="@color/guide_btn"
+        android:textSize="50px"
+        android:visibility="gone"/>
+</com.zhy.autolayout.AutoRelativeLayout>

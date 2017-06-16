@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="navigation_titles">
+        <item>曲库</item>
+        <item>教程</item>
+        <item>我的</item>
+    </string-array>
+</resources>
