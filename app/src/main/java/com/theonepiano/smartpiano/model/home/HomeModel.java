@@ -1,5 +1,6 @@
 package com.theonepiano.smartpiano.model.home;
 
+import com.theonepiano.smartpiano.api.RestClient;
 import com.theonepiano.smartpiano.model.home.bean.HomeCateList;
 import com.theonepiano.smartpiano.presenter.home.interfaces.HomeContract;
 
@@ -14,6 +15,6 @@ import rx.Observable;
 public class HomeModel implements HomeContract.Model {
     @Override
     public Observable<List<HomeCateList>> getHomeCateList() {
-        return null;
+        return RestClient.getInstance().getHomeService().getHomeCateList();
     }
 }
