@@ -21,7 +21,6 @@ public class RestClient {
         if (sHomeService == null) {
             synchronized (HomeService.class) {
                 if (sHomeService == null) {
-
                 }
             }
         }

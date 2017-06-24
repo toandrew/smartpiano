@@ -2,10 +2,10 @@ package com.theonepiano.smartpiano;
 
 import android.os.Bundle;
 
-import com.theonepiano.smartpiano.ui.course.fragment.CourseFragment;
-import com.theonepiano.smartpiano.ui.user.fragment.UserFragment;
 import com.theonepiano.smartpiano.base.BaseFragmentActivity;
+import com.theonepiano.smartpiano.ui.course.fragment.CourseFragment;
 import com.theonepiano.smartpiano.ui.home.fragment.HomeFragment;
+import com.theonepiano.smartpiano.ui.user.fragment.UserFragment;
 import com.theonepiano.smartpiano.view.home.NavigateTabBar;
 
 import butterknife.BindView;

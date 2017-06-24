@@ -6,8 +6,6 @@ import com.theonepiano.smartpiano.presenter.home.interfaces.HomeContract;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscriber;
-
 /**
  * Created by jim on 2017/6/12.
  */
@@ -15,25 +13,25 @@ import rx.Subscriber;
 public class HomePresenter extends HomeContract.Presenter {
     @Override
     public void getHomeCateList() {
-//        List<HomeCateList> list = new ArrayList<>();
-//        list.add(new HomeCateList());
-//        list.add(new HomeCateList());
-//        mView.onGetHomeAllList(list);
-        addSubscribe(mModel.getHomeCateList().subscribe(new Subscriber<List<HomeCateList>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(List<HomeCateList> homeCateLists) {
-
-            }
-        }));
+        List<HomeCateList> list = new ArrayList<>();
+        list.add(new HomeCateList());
+        list.add(new HomeCateList());
+        mView.onGetHomeAllList(list);
+//        addSubscribe(mModel.getHomeCateList().subscribe(new Subscriber<List<HomeCateList>>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(List<HomeCateList> homeCateLists) {
+//
+//            }
+//        }));
     }
 }

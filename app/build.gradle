@@ -53,4 +53,17 @@ dependencies {
 
     // retrofit2
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    // banner
+    compile 'com.youth.banner:banner:1.4.9'
+
+    // glide
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
+    compile 'com.android.support:support-v4:25.3.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
+
+    // vlayout
+    compile ('com.alibaba.android:vlayout:1.0.7@aar') {
+        transitive = true
+    }
 }

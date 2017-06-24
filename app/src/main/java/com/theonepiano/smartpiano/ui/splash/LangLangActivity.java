@@ -7,9 +7,9 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 
+import com.theonepiano.smartpiano.HomeActivity;
 import com.theonepiano.smartpiano.R;
 import com.theonepiano.smartpiano.base.BaseFragmentActivity;
-import com.theonepiano.smartpiano.HomeActivity;
 import com.yqritc.scalablevideoview.ScalableType;
 import com.yqritc.scalablevideoview.ScalableVideoView;
 

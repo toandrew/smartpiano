@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.theonepiano.smartpiano.HomeActivity;
 import com.theonepiano.smartpiano.R;
 import com.theonepiano.smartpiano.ui.guide.GuideActivity;
-import com.theonepiano.smartpiano.HomeActivity;
 
 /**
  * Created by jim on 2017/6/4.

@@ -21,6 +21,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     private static final String PREFERENCE_NAME = "Once";
     private static final String FIRST_OPEN_TAG = "first_open";
+    private static final String LANGLANG_OPEN_TAG = "langlang_open";
 
     private static final int LOGO_DISPLAY_TIMEOUT_MS = 600;
     private static final int LOGO_ENTER_ANOTHER_ACTIVITY_TIMEOUT_MS = 1000;
@@ -72,6 +73,18 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     @VisibleForTesting
+    boolean isLangLangFirst() {
+        SharedPreferences prefs = MainActivity.this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(LANGLANG_OPEN_TAG, true);
+    }
+
+    @VisibleForTesting
+    void setLangLangFirst(boolean first) {
+        SharedPreferences prefs = MainActivity.this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        prefs.edit().putBoolean(LANGLANG_OPEN_TAG, first).apply();
+    }
+
+    @VisibleForTesting
     boolean isFirst() {
         SharedPreferences prefs = MainActivity.this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(FIRST_OPEN_TAG, true);
@@ -95,8 +108,15 @@ public class MainActivity extends BaseFragmentActivity {
 
             setFirst(false);
         } else {
-            Intent intent = new Intent(this, LangLangActivity.class);
-            startActivity(intent);
+            if (isLangLangFirst()) {
+                Intent intent = new Intent(this, LangLangActivity.class);
+                startActivity(intent);
+
+                setLangLangFirst(false);
+            } else {
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+            }
         }
 
         finish();
