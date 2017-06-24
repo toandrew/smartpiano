@@ -52,7 +52,7 @@ public class SongItemLinearLayoutAdapter extends DelegateAdapter.Adapter<SongIte
 
     @Override
     public int getItemCount() {
-        return 100;
+        return 5;
     }
 
     @Override

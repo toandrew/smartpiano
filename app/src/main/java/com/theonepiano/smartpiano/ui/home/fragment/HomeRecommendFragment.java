@@ -100,6 +100,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendModel, Home
         hotAlbumHelper.setAutoExpand(false);
         hotAlbumHelper.setWeights(new float[] {33, 33, 33});
         hotAlbumHelper.setItemCount(6);
+        hotAlbumHelper.setAspectRatio(3);
 
         AlbumSongGridAdapter hotAlbumAdapter = new AlbumSongGridAdapter(getContext(), hotAlbumHelper, "Album");
         adapters.add(hotAlbumAdapter);
@@ -115,6 +116,8 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendModel, Home
         newAlbumHelper.setAutoExpand(false);
         newAlbumHelper.setWeights(new float[] {33, 33, 33});
         newAlbumHelper.setItemCount(3);
+        newAlbumHelper.setAspectRatio(3);
+
         AlbumSongGridAdapter newAlbumAdapter = new AlbumSongGridAdapter(getContext(), newAlbumHelper, "newest album!");
         adapters.add(newAlbumAdapter);
 

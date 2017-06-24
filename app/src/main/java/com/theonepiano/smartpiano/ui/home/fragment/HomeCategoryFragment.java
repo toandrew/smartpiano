@@ -3,6 +3,7 @@ package com.theonepiano.smartpiano.ui.home.fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,15 +38,11 @@ public class HomeCategoryFragment extends BaseFragment<HomeCategoryModel, HomeCa
     GenresDropDownAdapter mGenreListAdapter1;
     GenresDropDownAdapter mGenreListAdapter2;
     GenresDropDownAdapter mGenreListAdapter3;
-    GenresDropDownAdapter mGenreListAdapter4;
-    GenresDropDownAdapter mGenreListAdapter5;
 
 
-    private String headers[] = {"难度", "人群", "风格", "场景", "更多"};
+    private String headers[] = {"难度", "风格", "更多"};
     private String difficulties[] = {"不限", "新手", "流行", "古典", "轻音乐"};
-    private String peoples[] = {"儿童", "成人", "老师"};
     private String styles[] = {"流行", "古典", "轻音乐"};
-    private String scenes[] = {"弹唱", "节日", "求婚", "练琴"};
     private String more[] = {"最新曲集", "最热曲集", "经典教材", "考级教材", "直播课专区"};
 
     private List<View> popupViews = new ArrayList<>();
@@ -103,7 +100,7 @@ public class HomeCategoryFragment extends BaseFragment<HomeCategoryModel, HomeCa
 
         final ListView genresListView2 = new ListView(getActivity());
 
-        mGenreListAdapter2 = new GenresDropDownAdapter(getActivity(), Arrays.asList(peoples));
+        mGenreListAdapter2 = new GenresDropDownAdapter(getActivity(), Arrays.asList(styles));
         genresListView2.setDividerHeight(0);
         genresListView2.setAdapter(mGenreListAdapter2);
 
@@ -113,61 +110,29 @@ public class HomeCategoryFragment extends BaseFragment<HomeCategoryModel, HomeCa
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mGenreListAdapter2.setCheckedItemPosition(position);
-                mGenreDropDownMenu.setTabText(position == 0 ? headers[1] : peoples[position]);
+                mGenreDropDownMenu.setTabText(position == 0 ? headers[1] : styles[position]);
                 mGenreDropDownMenu.closeMenu();
             }
         });
 
-        final ListView genresListView3 = new ListView(getActivity());
+        popupViews.add(customMoreView());
 
-        mGenreListAdapter2 = new GenresDropDownAdapter(getActivity(), Arrays.asList(styles));
-        genresListView3.setDividerHeight(0);
-        genresListView3.setAdapter(mGenreListAdapter2);
-
-        popupViews.add(genresListView3);
-
-        genresListView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mGenreListAdapter2.setCheckedItemPosition(position);
-                mGenreDropDownMenu.setTabText(position == 0 ? headers[2] : styles[position]);
-                mGenreDropDownMenu.closeMenu();
-            }
-        });
-
-        final ListView genresListView4 = new ListView(getActivity());
-
-        mGenreListAdapter3 = new GenresDropDownAdapter(getActivity(), Arrays.asList(scenes));
-        genresListView4.setDividerHeight(0);
-        genresListView4.setAdapter(mGenreListAdapter3);
-
-        popupViews.add(genresListView4);
-
-        genresListView4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mGenreListAdapter3.setCheckedItemPosition(position);
-                mGenreDropDownMenu.setTabText(position == 0 ? headers[3] : scenes[position]);
-                mGenreDropDownMenu.closeMenu();
-            }
-        });
-
-        final ListView genresListView = new ListView(getActivity());
-
-        mGenreListAdapter5 = new GenresDropDownAdapter(getActivity(), Arrays.asList(more));
-        genresListView.setDividerHeight(0);
-        genresListView.setAdapter(mGenreListAdapter5);
-
-        popupViews.add(genresListView);
-
-        genresListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mGenreListAdapter5.setCheckedItemPosition(position);
-                mGenreDropDownMenu.setTabText(position == 0 ? headers[4] : more[position]);
-                mGenreDropDownMenu.closeMenu();
-            }
-        });
+//        final ListView genresListView3 = new ListView(getActivity());
+//
+//        mGenreListAdapter3 = new GenresDropDownAdapter(getActivity(), Arrays.asList(more));
+//        genresListView3.setDividerHeight(0);
+//        genresListView3.setAdapter(mGenreListAdapter3);
+//
+//        popupViews.add(genresListView3);
+//
+//        genresListView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                mGenreListAdapter2.setCheckedItemPosition(position);
+//                mGenreDropDownMenu.setTabText(position == 0 ? headers[2] : more[position]);
+//                mGenreDropDownMenu.closeMenu();
+//            }
+//        });
 
         TextView contentView = new TextView(getActivity());
         contentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -177,5 +142,15 @@ public class HomeCategoryFragment extends BaseFragment<HomeCategoryModel, HomeCa
 
         // init dropdownview
         mGenreDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
+    }
+
+    /**
+     * Get more view
+     *
+     * @return
+     */
+    private View customMoreView() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_home_category_filter_more, null);
+        return view;
     }
 }
