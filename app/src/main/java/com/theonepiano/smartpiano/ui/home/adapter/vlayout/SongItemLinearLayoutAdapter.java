@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.theonepiano.smartpiano.R;
+import com.theonepiano.smartpiano.model.home.bean.Song;
+
+import java.util.List;
 
 /**
  * Created by jim on 2017/6/24.
@@ -21,12 +24,16 @@ public class SongItemLinearLayoutAdapter extends DelegateAdapter.Adapter<SongIte
     private LayoutHelper mLayoutHelper;
     private String mName;
 
+    private List<Song> songs;
+
     private LayoutInflater mLayoutInflater;
 
-    public SongItemLinearLayoutAdapter(Context context, LayoutHelper helper, String name) {
+    public SongItemLinearLayoutAdapter(Context context, LayoutHelper helper, String name, List<Song> songs) {
         mContext = context;
         mLayoutHelper = helper;
         mName = name;
+
+        this.songs = songs;
 
         mLayoutInflater = LayoutInflater.from(context);
     }
@@ -52,7 +59,7 @@ public class SongItemLinearLayoutAdapter extends DelegateAdapter.Adapter<SongIte
 
     @Override
     public int getItemCount() {
-        return 5;
+        return songs.size();
     }
 
     @Override

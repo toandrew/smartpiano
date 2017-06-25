@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.theonepiano.smartpiano.R;
+import com.theonepiano.smartpiano.model.home.bean.Album;
+
+import java.util.List;
 
 /**
  * Created by jim on 2017/6/24.
@@ -21,10 +24,14 @@ public class AlbumSongGridAdapter extends DelegateAdapter.Adapter<AlbumSongGridA
     private LayoutInflater mLayoutInflater;
     private String mName;
 
-    public AlbumSongGridAdapter(Context context, LayoutHelper helper, String name) {
+    private List<Album> albums;
+
+    public AlbumSongGridAdapter(Context context, LayoutHelper helper, String name, List<Album> albums) {
         mContext = context;
         mLayoutHelper = helper;
         mName = name;
+
+        this.albums = albums;
 
         mLayoutInflater = LayoutInflater.from(context);
     }
@@ -53,7 +60,7 @@ public class AlbumSongGridAdapter extends DelegateAdapter.Adapter<AlbumSongGridA
 
     @Override
     public int getItemCount() {
-        return 6;
+        return albums.size();
     }
 
     @Override

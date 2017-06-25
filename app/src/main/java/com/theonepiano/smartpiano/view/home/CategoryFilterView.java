@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.theonepiano.smartpiano.R;
 import com.theonepiano.smartpiano.model.home.bean.HomeCategoryGenreList;
-import com.theonepiano.smartpiano.ui.home.adapter.CategoryFilterListAdapter;
+import com.theonepiano.smartpiano.ui.home.adapter.HomeCategoryFilterListAdapter;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -25,8 +25,8 @@ import java.util.List;
 public class CategoryFilterView extends LinearLayout {
     DropDownMenu mCategoryDropDownMenu;
 
-    CategoryFilterListAdapter mCategoryListAdapter1;
-    CategoryFilterListAdapter mCategoryListAdapter2;
+    HomeCategoryFilterListAdapter mCategoryListAdapter1;
+    HomeCategoryFilterListAdapter mCategoryListAdapter2;
 
     private String headers[] = {"难度", "风格", "更多"};
     private String difficulties[] = {"不限", "新手", "流行", "古典", "轻音乐"};
@@ -62,7 +62,7 @@ public class CategoryFilterView extends LinearLayout {
 
         final ListView categoryListView1 = new ListView(mContext);
 
-        mCategoryListAdapter1 = new CategoryFilterListAdapter(mContext, Arrays.asList(difficulties));
+        mCategoryListAdapter1 = new HomeCategoryFilterListAdapter(mContext, Arrays.asList(difficulties));
         categoryListView1.setDividerHeight(0);
         categoryListView1.setAdapter(mCategoryListAdapter1);
 
@@ -79,7 +79,7 @@ public class CategoryFilterView extends LinearLayout {
 
         final ListView categoryListView2 = new ListView(mContext);
 
-        mCategoryListAdapter2 = new CategoryFilterListAdapter(mContext, Arrays.asList(styles));
+        mCategoryListAdapter2 = new HomeCategoryFilterListAdapter(mContext, Arrays.asList(styles));
         categoryListView2.setDividerHeight(0);
         categoryListView2.setAdapter(mCategoryListAdapter2);
 

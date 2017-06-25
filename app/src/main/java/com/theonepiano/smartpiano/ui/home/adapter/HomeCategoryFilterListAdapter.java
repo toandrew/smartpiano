@@ -15,14 +15,14 @@ import java.util.List;
  * Created by jim on 2017/6/15.
  */
 
-public class CategoryFilterListAdapter extends BaseAdapter {
+public class HomeCategoryFilterListAdapter extends BaseAdapter {
     private Context mContext;
 
     private List<String> mList;
 
     private int mCheckedItemPosition = 0;
 
-    public CategoryFilterListAdapter(Context context, List<String> list) {
+    public HomeCategoryFilterListAdapter(Context context, List<String> list) {
         mContext = context;
 
         mList = list;
