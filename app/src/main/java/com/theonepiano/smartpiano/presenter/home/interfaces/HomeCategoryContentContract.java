@@ -8,13 +8,13 @@ import com.theonepiano.smartpiano.base.BaseView;
  * Created by jim on 2017/6/25.
  */
 
-public interface CategoryContentContract {
+public interface HomeCategoryContentContract {
     interface View extends BaseView {
     }
 
     interface Model extends BaseModel {
     }
 
-    abstract class Presenter extends BasePresenter<CategoryContentContract.View, CategoryContentContract.Model> {
+    abstract class Presenter extends BasePresenter<View, Model> {
     }
 }

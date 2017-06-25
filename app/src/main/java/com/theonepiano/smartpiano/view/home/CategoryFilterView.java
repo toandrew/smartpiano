@@ -110,7 +110,7 @@ public class CategoryFilterView extends LinearLayout {
      * @return
      */
     private View customMoreView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_home_category_filter_more, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.home_category_filter_more, null);
         return view;
     }
 }

@@ -1,6 +1,5 @@
 package com.theonepiano.smartpiano.model;
 
-import com.theonepiano.smartpiano.base.BaseFragment;
 import com.theonepiano.smartpiano.base.BaseModel;
 import com.theonepiano.smartpiano.base.BasePresenter;
 import com.theonepiano.smartpiano.base.BaseView;
@@ -29,7 +28,7 @@ public class ContractProxy {
      * @param index
      * @return
      */
-    public static Class<BaseModel> getModelClazz(Class<? extends BaseFragment> clazz, int index) {
+    public static Class<BaseModel> getModelClazz(Class clazz, int index) {
         Type genType = clazz.getGenericSuperclass();
 
         if (!(genType instanceof ParameterizedType)) {
@@ -55,7 +54,7 @@ public class ContractProxy {
      * @param index
      * @return
      */
-    public static Class<BasePresenter> getPresenterClazz(Class<? extends BaseFragment> clazz, int index) {
+    public static Class<BasePresenter> getPresenterClazz(Class clazz, int index) {
         Type genType = clazz.getGenericSuperclass();
 
         if (!(genType instanceof ParameterizedType)) {
@@ -140,4 +139,5 @@ public class ContractProxy {
             presenter.detachModel();
         }
     }
+
 }

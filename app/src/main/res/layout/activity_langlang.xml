@@ -19,8 +19,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100px"
         android:background="@drawable/selector_blue_button_background"
-        android:text="@string/try_right_now"
         android:gravity="center"
+        android:text="@string/try_right_now"
         android:textColor="@color/guide_btn"
         android:textSize="50px" />
 

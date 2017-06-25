@@ -7,17 +7,13 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.theonepiano.smartpiano.R;
 import com.theonepiano.smartpiano.base.BaseFragment;
 import com.theonepiano.smartpiano.base.BaseView;
-import com.theonepiano.smartpiano.model.home.CategoryContentModel;
+import com.theonepiano.smartpiano.model.home.HomeCategoryContentModel;
 import com.theonepiano.smartpiano.model.home.bean.Album;
-import com.theonepiano.smartpiano.model.home.bean.RecommendAlbumSong;
-import com.theonepiano.smartpiano.model.home.bean.Song;
-import com.theonepiano.smartpiano.presenter.home.impl.CategoryPresenter;
-import com.theonepiano.smartpiano.presenter.home.interfaces.CategoryContentContract;
+import com.theonepiano.smartpiano.presenter.home.impl.HomeCategoryContentPresenter;
+import com.theonepiano.smartpiano.presenter.home.interfaces.HomeCategoryContentContract;
 import com.theonepiano.smartpiano.ui.home.adapter.HomeCategoryAdapter;
-import com.theonepiano.smartpiano.ui.home.adapter.HomeRecommendAdapter;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,7 +22,7 @@ import butterknife.BindView;
  * Created by jim on 2017/6/25.
  */
 
-public class HomeCategoryContentFragment extends BaseFragment<CategoryContentContract.Model, CategoryContentContract.Presenter> implements CategoryContentContract.View {
+public class HomeCategoryContentFragment extends BaseFragment<HomeCategoryContentContract.Model, HomeCategoryContentContract.Presenter> implements HomeCategoryContentContract.View {
     @BindView(R.id.category_content_view)
     RecyclerView mContentView;
 
@@ -37,8 +33,8 @@ public class HomeCategoryContentFragment extends BaseFragment<CategoryContentCon
 
     @Override
     protected void initViews(Bundle bundle) {
-        mPresenter = new CategoryPresenter();
-        mPresenter.attachModel(new CategoryContentModel());
+        mPresenter = new HomeCategoryContentPresenter();
+        mPresenter.attachModel(new HomeCategoryContentModel());
         mPresenter.attachView(this);
 
         initContentViews();

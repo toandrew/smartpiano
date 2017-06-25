@@ -25,7 +25,7 @@
             tl:tl_tab_space_equal="true"
             tl:tl_textBold="BOTH"
             tl:tl_textSelectColor="#ff7800"
-            tl:tl_textUnselectColor="#707070"/>
+            tl:tl_textUnselectColor="#707070" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"

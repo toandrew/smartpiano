@@ -8,4 +8,28 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!--滑动返回主题-->
+    <style name="AppTheme.NoActionBar.AppBaseTheme">
+        <!--设置窗口为透明窗体，所以APP启动时的黑白屏也变成了透明的-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+    <!--主界面主题-->
+    <style name="AppTheme.NoActionBar.AppBaseThemeMain" >
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+    <!-- animation 样式 -->
+    <style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+    </style>
+
 </resources>

@@ -63,7 +63,7 @@ public class HomeCategoryFragment extends BaseFragment<HomeCategoryModel, HomeCa
     }
 
     private View getContentView() {
-        View contentView = LayoutInflater.from(getContext()).inflate(R.layout.layout_home_category_content, null);
+        View contentView = LayoutInflater.from(getContext()).inflate(R.layout.home_category_content, null);
         return contentView;
     }
 }

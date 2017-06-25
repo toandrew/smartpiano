@@ -66,4 +66,7 @@ dependencies {
     compile ('com.alibaba.android:vlayout:1.0.7@aar') {
         transitive = true
     }
+
+    // swipebacklayout
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
 }
