@@ -67,7 +67,7 @@ public class AlbumSongGridAdapter extends DelegateAdapter.Adapter<AlbumSongGridA
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            mName = (TextView)itemView.findViewById(R.id.item_name);
+            mName = (TextView) itemView.findViewById(R.id.item_name);
         }
     }
 }

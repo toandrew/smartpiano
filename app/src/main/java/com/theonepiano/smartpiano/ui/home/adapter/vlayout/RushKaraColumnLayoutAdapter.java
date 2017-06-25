@@ -68,7 +68,7 @@ public class RushKaraColumnLayoutAdapter extends DelegateAdapter.Adapter<RushKar
         public MyViewHolder(View view) {
             super(view);
 
-            mTextView = (TextView)view.findViewById(R.id.fix_name);
+            mTextView = (TextView) view.findViewById(R.id.fix_name);
         }
     }
 }

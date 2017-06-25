@@ -8,12 +8,9 @@ import com.theonepiano.smartpiano.R;
 import com.theonepiano.smartpiano.base.BaseFragment;
 import com.theonepiano.smartpiano.base.BaseView;
 import com.theonepiano.smartpiano.model.home.HomeModel;
-import com.theonepiano.smartpiano.model.home.bean.HomeCateList;
 import com.theonepiano.smartpiano.presenter.home.impl.HomePresenter;
 import com.theonepiano.smartpiano.presenter.home.interfaces.HomeContract;
-import com.theonepiano.smartpiano.ui.home.adapter.HomeAllListAdapter;
-
-import java.util.List;
+import com.theonepiano.smartpiano.ui.home.adapter.HomeFragmentListAdapter;
 
 import butterknife.BindView;
 
@@ -29,7 +26,7 @@ public class HomeFragment extends BaseFragment<HomeModel, HomePresenter> impleme
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
 
-    private HomeAllListAdapter mAdapter;
+    private HomeFragmentListAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -38,7 +35,13 @@ public class HomeFragment extends BaseFragment<HomeModel, HomePresenter> impleme
 
     @Override
     protected void initViews(Bundle bundle) {
+        final String[] titles = getResources().getStringArray(R.array.home_fragments);
 
+        mViewPager.setOffscreenPageLimit(titles.length);
+        mAdapter = new HomeFragmentListAdapter(getChildFragmentManager());
+        mViewPager.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+        mSlidingTab.setViewPager(mViewPager, titles);
     }
 
     @Override
@@ -48,17 +51,5 @@ public class HomeFragment extends BaseFragment<HomeModel, HomePresenter> impleme
 
     @Override
     protected void lazyFetchData() {
-        mPresenter.getHomeCateList();
-    }
-
-    @Override
-    public void onGetHomeAllList(List<HomeCateList> cateList) {
-        String[] titles = new String[]{"推荐", "分类"};
-
-        mViewPager.setOffscreenPageLimit(titles.length);
-        mAdapter = new HomeAllListAdapter(getChildFragmentManager(), cateList, titles);
-        mViewPager.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        mSlidingTab.setViewPager(mViewPager, titles);
     }
 }

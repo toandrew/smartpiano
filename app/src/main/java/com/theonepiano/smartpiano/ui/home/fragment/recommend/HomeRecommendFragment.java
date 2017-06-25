@@ -1,4 +1,4 @@
-package com.theonepiano.smartpiano.ui.home.fragment;
+package com.theonepiano.smartpiano.ui.home.fragment.recommend;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -98,7 +98,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendModel, Home
         // hot album
         GridLayoutHelper hotAlbumHelper = new GridLayoutHelper(3);
         hotAlbumHelper.setAutoExpand(false);
-        hotAlbumHelper.setWeights(new float[] {33, 33, 33});
+        hotAlbumHelper.setWeights(new float[]{33, 33, 33});
         hotAlbumHelper.setItemCount(6);
         hotAlbumHelper.setAspectRatio(3);
 
@@ -114,7 +114,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendModel, Home
         // the newest album
         GridLayoutHelper newAlbumHelper = new GridLayoutHelper(3);
         newAlbumHelper.setAutoExpand(false);
-        newAlbumHelper.setWeights(new float[] {33, 33, 33});
+        newAlbumHelper.setWeights(new float[]{33, 33, 33});
         newAlbumHelper.setItemCount(3);
         newAlbumHelper.setAspectRatio(3);
 

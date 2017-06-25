@@ -15,14 +15,14 @@ import java.util.List;
  * Created by jim on 2017/6/15.
  */
 
-public class GenresDropDownAdapter extends BaseAdapter {
+public class CategoryFilterListAdapter extends BaseAdapter {
     private Context mContext;
 
     private List<String> mList;
 
     private int mCheckedItemPosition = 0;
 
-    public GenresDropDownAdapter(Context context, List<String> list) {
+    public CategoryFilterListAdapter(Context context, List<String> list) {
         mContext = context;
 
         mList = list;
@@ -54,7 +54,7 @@ public class GenresDropDownAdapter extends BaseAdapter {
 
         if (convertView != null) {
             viewHolder = (ViewHolder) convertView.getTag();
-        } else{
+        } else {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list_dropdown, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
@@ -79,7 +79,7 @@ public class GenresDropDownAdapter extends BaseAdapter {
         TextView mText;
 
         ViewHolder(View view) {
-            mText = (TextView)view.findViewById(R.id.text);
+            mText = (TextView) view.findViewById(R.id.text);
         }
     }
 }

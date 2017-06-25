@@ -91,7 +91,7 @@ public class NavigateTabBar extends LinearLayout implements View.OnClickListener
             throw new RuntimeException("Parent activity must be extends FragmentActivity");
         }
 
-        mFragmentActivity = (FragmentActivity)getContext();
+        mFragmentActivity = (FragmentActivity) getContext();
 
         ViewHolder defaultHolder = null;
 
@@ -127,8 +127,8 @@ public class NavigateTabBar extends LinearLayout implements View.OnClickListener
         holder.fragmentClass = frameLayoutClass;
         holder.tag = tabParam.title;
         holder.pageParam = tabParam;
-        holder.tabIcon = (ImageView)view.findViewById(R.id.tab_icon);
-        holder.tabTitle = (TextView)view.findViewById(R.id.tab_title);
+        holder.tabIcon = (ImageView) view.findViewById(R.id.tab_icon);
+        holder.tabTitle = (TextView) view.findViewById(R.id.tab_title);
 
         if (TextUtils.isEmpty(tabParam.title)) {
             holder.tabTitle.setVisibility(View.INVISIBLE);
@@ -168,7 +168,7 @@ public class NavigateTabBar extends LinearLayout implements View.OnClickListener
         Object object = view.getTag();
 
         if (object != null && object instanceof ViewHolder) {
-            ViewHolder holder = (ViewHolder)view.getTag();
+            ViewHolder holder = (ViewHolder) view.getTag();
             if (mTabSelectedListener != null) {
                 mTabSelectedListener.onTabSelected(holder);
             }
@@ -183,7 +183,7 @@ public class NavigateTabBar extends LinearLayout implements View.OnClickListener
 
         mTabTextSize = typedArray.getDimensionPixelSize(R.styleable.NavigateTabBar_navigateTabTextSize, 0);
         mMainContentLayoutId = typedArray.getResourceId(R.styleable.NavigateTabBar_containerId, 0);
-        mNormalTextColor = (tabTextColor != null? tabTextColor : mContext.getResources().getColorStateList(R.color.tab_text_normal));
+        mNormalTextColor = (tabTextColor != null ? tabTextColor : mContext.getResources().getColorStateList(R.color.tab_text_normal));
 
         typedArray.recycle();
 
@@ -196,29 +196,6 @@ public class NavigateTabBar extends LinearLayout implements View.OnClickListener
         }
 
         mViewHolderList = new ArrayList<>();
-    }
-
-    public static class ViewHolder {
-        public String tag;
-        public TabParam pageParam;
-        public ImageView tabIcon;
-        public TextView tabTitle;
-        public Class fragmentClass;
-        public int tabIndex;
-    }
-
-    public static class TabParam {
-        public int backgroundColor = android.R.color.white;
-        public int iconResId;
-        public int iconSelectedResId;
-        public int titleStringRes;
-        public String title;
-
-        public TabParam(int iconResId, int iconSelectedResId, String title) {
-            this.iconResId = iconResId;
-            this.iconSelectedResId = iconSelectedResId;
-            this.title = title;
-        }
     }
 
     private void hideAllFragment() {
@@ -298,7 +275,7 @@ public class NavigateTabBar extends LinearLayout implements View.OnClickListener
         for (ViewHolder holder : mViewHolderList) {
             if (TextUtils.equals(tag, holder.tag)) {
                 try {
-                    fragment = (Fragment)Class.forName(holder.fragmentClass.getName()).newInstance();
+                    fragment = (Fragment) Class.forName(holder.fragmentClass.getName()).newInstance();
                 } catch (InstantiationException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -314,11 +291,34 @@ public class NavigateTabBar extends LinearLayout implements View.OnClickListener
         return fragment;
     }
 
+    public void setTabSelectedListener(OnTabSelectedListener tabSelectedListener) {
+        mTabSelectedListener = tabSelectedListener;
+    }
+
     public interface OnTabSelectedListener {
         void onTabSelected(ViewHolder holder);
     }
 
-    public void setTabSelectedListener(OnTabSelectedListener tabSelectedListener) {
-        mTabSelectedListener = tabSelectedListener;
+    public static class ViewHolder {
+        public String tag;
+        public TabParam pageParam;
+        public ImageView tabIcon;
+        public TextView tabTitle;
+        public Class fragmentClass;
+        public int tabIndex;
+    }
+
+    public static class TabParam {
+        public int backgroundColor = android.R.color.white;
+        public int iconResId;
+        public int iconSelectedResId;
+        public int titleStringRes;
+        public String title;
+
+        public TabParam(int iconResId, int iconSelectedResId, String title) {
+            this.iconResId = iconResId;
+            this.iconSelectedResId = iconSelectedResId;
+            this.title = title;
+        }
     }
 }

@@ -21,7 +21,7 @@ import java.util.Arrays;
  * Created by jim on 2017/6/24.
  */
 
-public class BannerAdapter extends DelegateAdapter.Adapter<BannerAdapter.MyViewHolder>{
+public class BannerAdapter extends DelegateAdapter.Adapter<BannerAdapter.MyViewHolder> {
     private Context mContext;
     private LayoutHelper mLayoutHelper;
     private LayoutInflater mLayoutInflater;
@@ -64,7 +64,7 @@ public class BannerAdapter extends DelegateAdapter.Adapter<BannerAdapter.MyViewH
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            mBanner = (Banner)itemView.findViewById(R.id.banner);
+            mBanner = (Banner) itemView.findViewById(R.id.banner);
 
             initBanner();
         }

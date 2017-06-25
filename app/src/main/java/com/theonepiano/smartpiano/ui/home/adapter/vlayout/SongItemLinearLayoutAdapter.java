@@ -66,7 +66,7 @@ public class SongItemLinearLayoutAdapter extends DelegateAdapter.Adapter<SongIte
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            mName = (TextView)itemView.findViewById(R.id.item_name);
+            mName = (TextView) itemView.findViewById(R.id.item_name);
         }
     }
 }

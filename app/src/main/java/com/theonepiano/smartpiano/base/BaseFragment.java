@@ -85,12 +85,18 @@ public abstract class BaseFragment<M extends BaseModel, P extends BasePresenter>
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-
+    public void onDestroyView() {
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
+
+        super.onDestroyView();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
         if (mPresenter != null) {
             ContractProxy.getInstance().unBindView(getViewImpl(), mPresenter);

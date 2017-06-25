@@ -5,16 +5,16 @@ import com.theonepiano.smartpiano.base.BasePresenter;
 import com.theonepiano.smartpiano.base.BaseView;
 
 /**
- * Created by jim on 2017/6/12.
+ * Created by jim on 2017/6/25.
  */
 
-public interface HomeContract {
+public interface CategoryContentContract {
     interface View extends BaseView {
     }
 
     interface Model extends BaseModel {
     }
 
-    abstract class Presenter extends BasePresenter<View, Model> {
+    abstract class Presenter extends BasePresenter<CategoryContentContract.View, CategoryContentContract.Model> {
     }
 }

@@ -15,11 +15,11 @@ import java.lang.reflect.Type;
 public class ContractProxy {
     private static final ContractProxy sInstance = new ContractProxy();
 
-    public static ContractProxy getInstance() {
-        return sInstance;
+    private ContractProxy() {
     }
 
-    private ContractProxy() {
+    public static ContractProxy getInstance() {
+        return sInstance;
     }
 
     /**

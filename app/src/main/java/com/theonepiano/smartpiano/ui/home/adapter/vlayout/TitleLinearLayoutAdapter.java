@@ -64,7 +64,7 @@ public class TitleLinearLayoutAdapter extends DelegateAdapter.Adapter<TitleLinea
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            mName = (TextView)itemView.findViewById(R.id.item_name);
+            mName = (TextView) itemView.findViewById(R.id.item_name);
         }
     }
 }
