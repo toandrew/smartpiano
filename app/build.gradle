@@ -69,4 +69,7 @@ dependencies {
 
     // swipebacklayout
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+
+    // gson
+    compile'com.google.code.gson:gson:2.8.1'
 }
