@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.theonepiano.smartpiano.base.BaseFragmentActivity;
 import com.theonepiano.smartpiano.ui.course.fragment.CourseFragment;
 import com.theonepiano.smartpiano.ui.home.fragment.HomeFragment;
-import com.theonepiano.smartpiano.ui.user.fragment.UserFragment;
+import com.theonepiano.smartpiano.ui.mine.fragment.MineFragment;
 import com.theonepiano.smartpiano.view.home.NavigateTabBar;
 
 import butterknife.BindView;
@@ -47,7 +47,7 @@ public class HomeActivity extends BaseFragmentActivity {
         final String[] titles = getResources().getStringArray(R.array.navigation_titles);
         mNavigateTabBar.addTab(HomeFragment.class, new NavigateTabBar.TabParam(R.drawable.home_pressed, R.drawable.home_selected, titles[0]));
         mNavigateTabBar.addTab(CourseFragment.class, new NavigateTabBar.TabParam(R.drawable.course_pressed, R.drawable.course_selected, titles[1]));
-        mNavigateTabBar.addTab(UserFragment.class, new NavigateTabBar.TabParam(R.drawable.user_pressed, R.drawable.user_selected, titles[2]));
+        mNavigateTabBar.addTab(MineFragment.class, new NavigateTabBar.TabParam(R.drawable.user_pressed, R.drawable.user_selected, titles[2]));
 
         mNavigateTabBar.setTabSelectedListener(new NavigateTabBar.OnTabSelectedListener() {
 

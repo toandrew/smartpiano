@@ -1,5 +1,8 @@
 package com.theonepiano.smartpiano.model.home.bean;
 
+import com.theonepiano.smartpiano.model.bean.Album;
+import com.theonepiano.smartpiano.model.bean.Song;
+
 import java.util.List;
 
 /**

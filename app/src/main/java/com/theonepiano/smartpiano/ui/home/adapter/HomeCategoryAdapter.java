@@ -5,7 +5,7 @@ import android.content.Context;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
-import com.theonepiano.smartpiano.model.home.bean.Album;
+import com.theonepiano.smartpiano.model.bean.Album;
 import com.theonepiano.smartpiano.ui.home.adapter.vlayout.AlbumSongGridAdapter;
 
 import java.util.ArrayList;

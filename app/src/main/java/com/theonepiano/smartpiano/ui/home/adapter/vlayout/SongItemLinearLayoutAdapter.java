@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.theonepiano.smartpiano.R;
-import com.theonepiano.smartpiano.model.home.bean.Song;
+import com.theonepiano.smartpiano.model.bean.Song;
 
 import java.util.List;
 
