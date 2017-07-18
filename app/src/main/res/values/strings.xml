@@ -2,4 +2,15 @@
     <string name="app_name">SmartPiano</string>
 
     <string name="try_right_now">Get started!</string>
+
+    <string name="usercenter_login">登录</string>
+    <string name="usercenter_register">注册</string>
+
+    <string name="my_collection">我的收藏</string>
+    <string name="my_record">我的录音</string>
+    <string name="learn_tools">学习工具</string>
+    <string name="bluetooth_settings">蓝牙设置</string>
+    <string name="voice_settings">音色设置</string>
+    <string name="feedback">反馈</string>
+    <string name="about">关于</string>
 </resources>

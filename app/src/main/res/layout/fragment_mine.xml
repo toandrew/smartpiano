@@ -1,6 +1,402 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_background"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/bg_header_mine">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_avatar"
+            android:layout_width="60.0dp"
+            android:layout_height="60.0dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10.0dp"
+            android:layout_marginTop="38.0dp"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:background="@mipmap/usercenter_default_avatar"
+            fresco:placeholderImage="@mipmap/usercenter_default_avatar"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:roundAsCircle="true"
+            fresco:roundingBorderColor="#ffffff"
+            fresco:roundingBorderWidth="2px" />
+
+        <RelativeLayout
+            android:id="@+id/rl_not_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="60.0dp"
+            android:layout_toRightOf="@id/iv_avatar"
+            android:visibility="visible">
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="75.0dp"
+                android:layout_height="30.0dp"
+                android:background="@drawable/login_or_register"
+                android:gravity="center"
+                android:text="@string/usercenter_login"
+                android:textColor="@color/login_or_register"
+
+                />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="75.0dp"
+                android:layout_height="30.0dp"
+                android:layout_marginLeft="7.0dp"
+                android:layout_toRightOf="@id/btn_login"
+                android:background="@drawable/login_or_register"
+
+                android:gravity="center"
+                android:text="@string/usercenter_register"
+                android:textColor="@color/login_or_register" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_aready_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7.0dp"
+            android:layout_toRightOf="@id/iv_avatar"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50.0dp"
+                android:text="小生"
+                android:textColor="@color/dialog_white"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nickname"
+                android:layout_marginTop="10.0dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="70.0dp"
+                    android:layout_height="20.0dp"
+                    android:background="@drawable/usercenter_lv_bg">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="2px"
+                        android:paddingLeft="5px"
+                        android:paddingTop="2px"
+                        android:text="Lv1"
+                        android:textColor="@color/dialog_white"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="70.0dp"
+                    android:layout_height="20.0dp"
+                    android:layout_marginLeft="7.0dp"
+                    android:background="@drawable/usercenter_lv_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5px"
+                        android:src="@mipmap/icon_usercenter_yuci" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5px"
+                        android:text="0"
+                        android:textColor="@color/dialog_white"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15px"
+                        android:src="@mipmap/icon_usercenter_yuwan" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5px"
+                        android:text="0"
+                        android:textColor="@color/dialog_white"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="7.0dp"
+                android:layout_marginTop="12.0dp"
+                android:clickable="true"
+                android:src="@drawable/usercenter_setting" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_my_collection"
+        android:layout_width="match_parent"
+        android:layout_height="48.0dp"
+        android:layout_marginTop="8.0dp"
+        android:background="@drawable/selecter_clicked"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:src="@mipmap/icon_mine_my_collection" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/iv_collection"
+            android:text="@string/my_collection"
+            android:textColor="#444444"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="9.0dp"
+            android:src="@mipmap/usercenter_grey_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_my_record"
+        android:layout_width="match_parent"
+        android:layout_height="48.0dp"
+        android:layout_marginTop="1.0dp"
+        android:background="@drawable/selecter_clicked"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_my_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:src="@mipmap/icon_mine_my_record" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/iv_my_record"
+            android:text="@string/my_record"
+            android:textColor="#444444"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="9.0dp"
+            android:src="@mipmap/usercenter_grey_arrow" />
+    </RelativeLayout>
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1px"-->
+    <!--android:background="#dfdfdf"-->
+    <!--android:layout_marginRight="9.0dp"-->
+    <!--android:layout_marginLeft="9.0dp"/>-->
+    <RelativeLayout
+        android:id="@+id/rl_learn_tools"
+        android:layout_width="match_parent"
+        android:layout_height="48.0dp"
+        android:layout_marginTop="1.0dp"
+        android:background="@drawable/selecter_clicked"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_learn_tools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:src="@mipmap/icon_mine_learn_tools" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/iv_learn_tools"
+            android:text="@string/learn_tools"
+            android:textColor="#444444"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="9.0dp"
+            android:src="@mipmap/usercenter_grey_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bluetooth_settings"
+        android:layout_width="match_parent"
+        android:layout_height="48.0dp"
+        android:layout_marginTop="1.0dp"
+        android:background="@drawable/selecter_clicked"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_bluetooth_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:src="@mipmap/icon_mine_bluetooth_settings" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/iv_bluetooth_settings"
+            android:text="@string/bluetooth_settings"
+            android:textColor="#444444"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="9.0dp"
+            android:src="@mipmap/usercenter_grey_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_voice_settings"
+        android:layout_width="match_parent"
+        android:layout_height="48.0dp"
+        android:layout_marginTop="1.0dp"
+        android:background="@drawable/selecter_clicked"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_voice_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:src="@mipmap/icon_mine_voice_settings" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/iv_voice_settings"
+            android:text="@string/voice_settings"
+            android:textColor="#444444"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="9.0dp"
+            android:src="@mipmap/usercenter_grey_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="48.0dp"
+        android:layout_marginTop="8.0dp"
+        android:background="@drawable/selecter_clicked"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:src="@mipmap/icon_mine_feedback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/iv_feedback"
+            android:text="@string/feedback"
+            android:textColor="#444444"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="9.0dp"
+            android:src="@mipmap/usercenter_grey_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_about"
+        android:layout_width="match_parent"
+        android:layout_height="48.0dp"
+        android:layout_marginTop="1.0dp"
+        android:background="@drawable/selecter_clicked"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:src="@mipmap/icon_mine_about" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/iv_about"
+            android:text="@string/about"
+            android:textColor="#444444"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="9.0dp"
+            android:src="@mipmap/usercenter_grey_arrow" />
+    </RelativeLayout>
 
 </LinearLayout>

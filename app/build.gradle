@@ -72,4 +72,7 @@ dependencies {
 
     // gson
     compile'com.google.code.gson:gson:2.8.1'
+
+    // fresco
+    compile 'com.facebook.fresco:fresco:1.4.0'
 }

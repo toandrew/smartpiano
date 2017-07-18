@@ -106,4 +106,7 @@
     <color name="comui_tab_select_color">#FD9835</color>
     <color name="comui_tab_text_color">#929292</color>
 
+    <color name="base_background">#eeeeee</color>
+    <color name="dialog_white">#fdfdfd</color>
+    <color name="background">#ffffff</color>
 </resources>

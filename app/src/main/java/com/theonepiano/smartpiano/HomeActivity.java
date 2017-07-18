@@ -47,7 +47,7 @@ public class HomeActivity extends BaseFragmentActivity {
         final String[] titles = getResources().getStringArray(R.array.navigation_titles);
         mNavigateTabBar.addTab(HomeFragment.class, new NavigateTabBar.TabParam(R.drawable.home_pressed, R.drawable.home_selected, titles[0]));
         mNavigateTabBar.addTab(CourseFragment.class, new NavigateTabBar.TabParam(R.drawable.course_pressed, R.drawable.course_selected, titles[1]));
-        mNavigateTabBar.addTab(MineFragment.class, new NavigateTabBar.TabParam(R.drawable.user_pressed, R.drawable.user_selected, titles[2]));
+        mNavigateTabBar.addTab(MineFragment.class, new NavigateTabBar.TabParam(R.drawable.mine_pressed, R.drawable.mine_selected, titles[2]));
 
         mNavigateTabBar.setTabSelectedListener(new NavigateTabBar.OnTabSelectedListener() {
 
