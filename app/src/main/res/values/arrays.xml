@@ -11,4 +11,11 @@
         <item>推荐</item>
         <item>分类</item>
     </string-array>
+
+    <string-array name="bluetooth_status">
+        <item>可连接</item>
+        <item>连接中</item>
+        <item>已连接</item>
+        <item>离线</item>
+    </string-array>
 </resources>

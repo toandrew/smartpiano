@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48.0dp"
+    android:layout_marginTop="1.0dp"
+    android:background="@drawable/selecter_clicked"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/iv_bluetooth_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="9.0dp"
+        android:src="@mipmap/icon_mine_bluetooth_settings" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/iv_bluetooth_settings">
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:textColor="#444444"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/item_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:textColor="@color/app_red"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="9.0dp"
+        android:src="@mipmap/usercenter_grey_arrow" />
+</RelativeLayout>

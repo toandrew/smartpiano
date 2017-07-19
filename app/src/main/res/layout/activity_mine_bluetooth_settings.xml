@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/base_background">
 
-</LinearLayout>
+    <include layout="@layout/view_title"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/bluetooth_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:overScrollMode="never" />
+</com.zhy.autolayout.AutoLinearLayout>
