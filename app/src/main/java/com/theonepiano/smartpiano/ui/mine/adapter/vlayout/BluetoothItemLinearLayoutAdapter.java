@@ -57,6 +57,8 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
         myViewHolder.mName.setText(devices.get(position).name);
 
         myViewHolder.mStatus.setText(getDeviceStatus(devices.get(position).status));
+
+        myViewHolder.mInfo.setText(devices.get(position).info);
     }
 
     @Override
@@ -74,12 +76,16 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
 
         private TextView mStatus;
 
+        private TextView mInfo;
+
         public MyViewHolder(View itemView) {
             super(itemView);
 
             mName = (TextView) itemView.findViewById(R.id.item_name);
 
             mStatus = (TextView) itemView.findViewById(R.id.item_status);
+
+            mInfo = (TextView) itemView.findViewById(R.id.item_info);
         }
     }
 
