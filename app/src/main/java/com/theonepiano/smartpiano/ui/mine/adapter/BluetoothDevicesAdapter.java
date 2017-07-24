@@ -1,22 +1,11 @@
 package com.theonepiano.smartpiano.ui.mine.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
-import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.theonepiano.smartpiano.model.bean.Album;
-import com.theonepiano.smartpiano.model.bean.Song;
-import com.theonepiano.smartpiano.model.home.bean.RecommendAlbumSong;
-import com.theonepiano.smartpiano.model.mine.bean.BluetoothDevice;
-import com.theonepiano.smartpiano.ui.home.adapter.vlayout.AlbumSongGridAdapter;
-import com.theonepiano.smartpiano.ui.home.adapter.vlayout.BannerAdapter;
-import com.theonepiano.smartpiano.ui.home.adapter.vlayout.RushKaraColumnLayoutAdapter;
-import com.theonepiano.smartpiano.ui.home.adapter.vlayout.SongItemLinearLayoutAdapter;
-import com.theonepiano.smartpiano.ui.home.adapter.vlayout.TitleLinearLayoutAdapter;
+import com.theonepiano.smartpiano.model.mine.bean.MyBluetoothDevice;
 import com.theonepiano.smartpiano.ui.mine.adapter.vlayout.BluetoothItemLinearLayoutAdapter;
 
 import java.util.LinkedList;
@@ -38,7 +27,7 @@ public class BluetoothDevicesAdapter extends DelegateAdapter {
         mAdapters = new LinkedList<>();
     }
 
-    public void update(List<BluetoothDevice> items) {
+    public void update(List<MyBluetoothDevice> items) {
         mAdapters.clear();
 
         initBluetoothDevices(items);
@@ -46,7 +35,7 @@ public class BluetoothDevicesAdapter extends DelegateAdapter {
         this.setAdapters(mAdapters);
     }
 
-    private void initBluetoothDevices(List<BluetoothDevice> items) {
+    private void initBluetoothDevices(List<MyBluetoothDevice> items) {
         LinearLayoutHelper deviceHelper = new LinearLayoutHelper();
         deviceHelper.setItemCount(items.size());
         BluetoothItemLinearLayoutAdapter deviceAdapter = new BluetoothItemLinearLayoutAdapter(mContext, deviceHelper, items);

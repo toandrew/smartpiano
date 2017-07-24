@@ -1,1 +1,3 @@
-include ':app'
+include ':app', ':BLE-MIDI-library', ':midi-core'
+project(':BLE-MIDI-library').projectDir = new File('BLE-MIDI-for-Android/BLE-MIDI-library')
+project(':midi-core').projectDir = new File('midi-core/build/proj.android-studio')

@@ -11,11 +11,15 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.theonepiano.smartpiano.R;
-import com.theonepiano.smartpiano.model.bean.Song;
-import com.theonepiano.smartpiano.model.mine.bean.BluetoothDevice;
+import com.theonepiano.smartpiano.model.mine.bean.MyBluetoothDevice;
 import com.theonepiano.smartpiano.ui.home.adapter.vlayout.VlayoutAdapterType;
+import com.theonepiano.smartpiano.ui.mine.event.BluetoothClickedEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+
+import static jp.kshoji.driver.midi.util.Constants.TAG;
 
 /**
  * Created by jim on 2017/6/24.
@@ -24,13 +28,13 @@ import java.util.List;
 public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<BluetoothItemLinearLayoutAdapter.MyViewHolder> {
     private LayoutHelper mLayoutHelper;
 
-    private List<BluetoothDevice> devices;
+    private List<MyBluetoothDevice> devices;
 
     private LayoutInflater mLayoutInflater;
 
     String[] mDeviceStatus;
 
-    public BluetoothItemLinearLayoutAdapter(Context context, LayoutHelper helper, List<BluetoothDevice> devices) {
+    public BluetoothItemLinearLayoutAdapter(Context context, LayoutHelper helper, List<MyBluetoothDevice> devices) {
         mLayoutHelper = helper;
 
         this.devices = devices;
@@ -59,6 +63,8 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
         myViewHolder.mStatus.setText(getDeviceStatus(devices.get(position).status));
 
         myViewHolder.mInfo.setText(devices.get(position).info);
+
+        myViewHolder.mId.setText(devices.get(position).id);
     }
 
     @Override
@@ -78,6 +84,8 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
 
         private TextView mInfo;
 
+        private TextView mId;
+
         public MyViewHolder(View itemView) {
             super(itemView);
 
@@ -86,6 +94,20 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
             mStatus = (TextView) itemView.findViewById(R.id.item_status);
 
             mInfo = (TextView) itemView.findViewById(R.id.item_info);
+
+            mId = (TextView) itemView.findViewById(R.id.item_id);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.w(TAG, "onClick!!!!!" + mId.getText().toString());
+                    BluetoothClickedEvent event = new BluetoothClickedEvent();
+                    event.id = mId.getText().toString();
+                    event.name = mName.getText().toString();
+
+                    EventBus.getDefault().post(event);
+                }
+            });
         }
     }
 

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.theonepiano.smartpiano"
-        minSdkVersion 17
+        minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -20,59 +20,51 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-
-    testCompile "org.robolectric:robolectric:3.3.2"
-    testCompile "org.mockito:mockito-core:2.+"
-
+    testCompile 'org.robolectric:robolectric:3.3.2'
+    testCompile 'org.mockito:mockito-core:2.+'
     // butterknife
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-
     // scalablevideoview
     compile 'com.yqritc:android-scalablevideoview:1.0.4'
-
     // autolayout
     compile 'com.zhy:autolayout:1.4.5'
-
     // tablayout
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-
     // DropDownMenu
     compile 'com.github.dongjunkun:DropDownMenu:1.0.4'
-
     // RxJava and RxAndroid
     compile 'io.reactivex:rxjava:1.3.0'
     compile 'io.reactivex:rxandroid:1.2.1'
-
     // retrofit2
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-
     // banner
     compile 'com.youth.banner:banner:1.4.9'
-
     // glide
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     compile 'com.android.support:support-v4:25.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
-
     // vlayout
-    compile ('com.alibaba.android:vlayout:1.0.7@aar') {
+    compile('com.alibaba.android:vlayout:1.0.7@aar') {
         transitive = true
     }
-
     // swipebacklayout
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
-
     // gson
-    compile'com.google.code.gson:gson:2.8.1'
-
+    compile 'com.google.code.gson:gson:2.8.1'
     // fresco
     compile 'com.facebook.fresco:fresco:1.4.0'
+
+    // eventbus
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    compile project(':BLE-MIDI-library')
+    compile project(':midi-core')
 }

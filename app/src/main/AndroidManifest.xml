@@ -3,8 +3,12 @@
     package="com.theonepiano.smartpiano">
 
     <uses-feature android:name="android.bluetooth.le" android:required="true"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".app.App"
@@ -27,7 +31,8 @@
         <activity android:name=".HomeActivity" android:theme="@style/AppTheme.NoActionBar.AppBaseThemeMain"/>
         <activity android:name=".ui.home.activity.HomeMoreAlbumActivity" />
 
-        <activity android:name=".ui.mine.activity.BluetoothSettingsActivity" />
+        <activity android:name=".ui.mine.activity.BluetoothSettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <!-- 适配规格 -->
         <meta-data
             android:name="design_width"

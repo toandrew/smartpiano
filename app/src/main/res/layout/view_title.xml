@@ -12,6 +12,26 @@
         android:src="@mipmap/img_back"
         android:layout_marginLeft="5.0dp"
         />
+
+    <Button
+        android:id="@+id/start_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5.0dp"
+        android:text="start scan"
+        android:layout_toRightOf="@id/img_back"
+        />
+
+    <Button
+        android:id="@+id/stop_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5.0dp"
+        android:text="stop scan"
+        android:layout_toRightOf="@id/start_scan"
+        />
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"

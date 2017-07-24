@@ -13,9 +13,23 @@
     </string-array>
 
     <string-array name="bluetooth_status">
-        <item>可连接</item>
+        <item>在线(可连接)</item>
+        <item>已连接(发现服务中)</item>
+        <item>已连接(服务已发现)</item>
+        <item>已连接(服务未发现)</item>
+
+        <item>已连接(发现属性中)</item>
+        <item>已连接(属性已发现)</item>
+        <item>已连接(属性未发现)</item>
+        <item>已连接(有可读数据)</item>
+        <item>已连接(配置为可写)</item>
+
         <item>连接中</item>
         <item>已连接</item>
-        <item>离线</item>
+        <item>连接失败</item>
+        <item>连接断开</item>
+
+        <item>离线(不可连接)</item>
+        <item>设备出错</item>
     </string-array>
 </resources>
