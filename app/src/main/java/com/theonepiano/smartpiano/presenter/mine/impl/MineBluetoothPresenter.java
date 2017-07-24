@@ -30,8 +30,6 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
 
     private HashMap<String, BluetoothDevice> mBluetoothDevicesHashMap = new HashMap<>();
 
-    private HashMap<BluetoothDevice, Integer> mBluetoothDeviceStatusHashMap = new HashMap<>();
-
     @Override
     public void init() {
         mBleMidiManager.getInstance().init(mView.getMyContext());
@@ -61,7 +59,10 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
 
     @Override
     public void connect(String devId, String name) {
-        mBleMidiManager.getInstance().connect(mBluetoothDevicesHashMap.get(devId.toLowerCase()));
+        BluetoothDevice d = mBluetoothDevicesHashMap.get(devId.toLowerCase());
+        if (d != null) {
+            mBleMidiManager.getInstance().connect(d);
+        }
     }
 
     @Override
@@ -69,7 +70,7 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
         mBleMidiManager.getInstance().disconnect();
     }
 
-    private MyBluetoothDevice getMyBluetoothDevice(@NonNull BluetoothDevice device, int status) {
+    private MyBluetoothDevice createMyBluetoothDevice(@NonNull BluetoothDevice device, int status) {
         MyBluetoothDevice d = new MyBluetoothDevice();
         d.id = device.getAddress();
         d.name = device.getName();
@@ -79,30 +80,20 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
         return d;
     }
 
-    private List<MyBluetoothDevice> updateDevices(@NonNull BluetoothDevice device) {
+    private List<MyBluetoothDevice> updateDevices(@NonNull BluetoothDevice device, int status) {
         Log.w(TAG, "updateDevices![" + mBluetoothDeviceList.size() + "]");
 
         synchronized (mBluetoothDeviceList) {
-            if (mBluetoothDeviceList.size() == 0) {
-
-                MyBluetoothDevice m = getMyBluetoothDevice(device, getDeviceStatus(device));
-                mBluetoothDeviceList.add(m);
-
-                mBluetoothDevicesHashMap.put(m.id.toLowerCase(), device);
-
-                return mBluetoothDeviceList;
-            }
-
             BluetoothDevice d = mBluetoothDevicesHashMap.get(device.getAddress().toLowerCase());
             if (d == null) {
-                MyBluetoothDevice m = getMyBluetoothDevice(device, getDeviceStatus(device));
+                MyBluetoothDevice m = createMyBluetoothDevice(device, status);
                 mBluetoothDevicesHashMap.put(m.id.toLowerCase(), device);
 
                 mBluetoothDeviceList.add(m);
             } else {
                 for (MyBluetoothDevice m : mBluetoothDeviceList) {
                     if (m.id.equalsIgnoreCase(device.getAddress())) {
-                        m.status = getDeviceStatus(device);
+                        m.status = status;
 
                         Log.w(TAG, "device: " + device + "]status[ " + m.status + "]");
                     }
@@ -117,9 +108,10 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
      * reset all
      */
     private void reset() {
-        mBluetoothDeviceList.clear();
-        mBluetoothDevicesHashMap.clear();
-        mBluetoothDeviceStatusHashMap.clear();
+        synchronized (mBluetoothDeviceList) {
+            mBluetoothDeviceList.clear();
+            mBluetoothDevicesHashMap.clear();
+        }
 
         mBleMidiManager.getInstance().setOnBluetoothDeviceFoundListener(null);
         mBleMidiManager.getInstance().setOnMidiScanStatusListener(null);
@@ -134,7 +126,7 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
             @Override
             public void onDeviceFound(@NonNull BluetoothDevice device) {
                 Log.w(TAG, "onDeviceFound[" + device + "]");
-                mView.onDeviceUpdated(updateDevices(device));
+                mView.onDeviceUpdated(updateDevices(device, DEVICE_IDLE));
             }
         });
 
@@ -148,24 +140,9 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
         mBleMidiManager.getInstance().setOnMidiDeviceStatusListener(new OnMidiDeviceStatusListener() {
             @Override
             public void onDeviceStatusChanged(@NonNull BluetoothDevice device, int status) {
-                mBluetoothDeviceStatusHashMap.put(device, status);
                 Log.w(TAG, "device:" + device + " status[" + status + "]");
-                mView.onDeviceUpdated(updateDevices(device));
+                mView.onDeviceUpdated(updateDevices(device, status));
             }
         });
-    }
-
-    /**
-     * Get current ble device's status
-     *
-     * @param device
-     * @return
-     */
-    private int getDeviceStatus(@NonNull BluetoothDevice device) {
-        if (mBluetoothDeviceStatusHashMap.containsKey(device)) {
-            return mBluetoothDeviceStatusHashMap.get(device);
-        }
-
-        return DEVICE_IDLE;
     }
 }
