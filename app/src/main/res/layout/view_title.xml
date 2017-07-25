@@ -30,6 +30,16 @@
         android:layout_toRightOf="@id/start_scan"
         android:text="stop scan" />
 
+    <Button
+        android:id="@+id/send_midi_event"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5.0dp"
+        android:layout_toRightOf="@id/stop_scan"
+        android:text="send midi"
+        android:visibility="gone"/>
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"

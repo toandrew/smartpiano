@@ -22,7 +22,7 @@
         <item>已连接(属性已发现)</item>
         <item>已连接(属性未发现)</item>
         <item>已连接(有可读数据)</item>
-        <item>已连接(配置为可写)</item>
+        <item>已连接(配置为可读写)</item>
 
         <item>连接中</item>
         <item>已连接</item>

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.theonepiano.smartpiano.R;
@@ -54,6 +55,12 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
 
     @BindView(R.id.scanning_progress)
     ProgressBar mScanningProgressBar;
+
+    @BindView(R.id.send_midi_event)
+    Button mSendMidiEventBtn;
+
+    @BindView(R.id.received_midi_event)
+    TextView mReceivedMidiEvent;
 
     BluetoothDevicesAdapter mBluetoothDevicesAdapter;
 
@@ -116,6 +123,11 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
         mPresenter.stopScan();
     }
 
+    @OnClick(R.id.send_midi_event)
+    public void onSendMidiClicked(View view) {
+
+    }
+
     @Override
     public Context getMyContext() {
         return this.getApplicationContext();
@@ -164,6 +176,8 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
                     mBluetoothDevicesAdapter.update(devices);
                     mContentView.setAdapter(mBluetoothDevicesAdapter);
                 }
+
+                updateMidiBtnStatus();
             }
         });
     }
@@ -195,6 +209,18 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
 
         if (event.status == DEVICE_IDLE || event.status == DEVICE_DISCONNECTED) {
             mPresenter.connect(event.id, event.name);
+        }
+
+        updateMidiBtnStatus();
+    }
+
+    private void updateMidiBtnStatus() {
+        if (mPresenter.isBluetoothDeviceConnected()) {
+            mSendMidiEventBtn.setVisibility(View.VISIBLE);
+            mReceivedMidiEvent.setVisibility(View.VISIBLE);
+        } else {
+            mSendMidiEventBtn.setVisibility(View.GONE);
+            mReceivedMidiEvent.setVisibility(View.GONE);
         }
     }
 }

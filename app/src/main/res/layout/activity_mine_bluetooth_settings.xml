@@ -7,10 +7,18 @@
 
     <include layout="@layout/view_title"/>
 
+    <TextView android:id="@+id/received_midi_event"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/blue_500"
+        android:text="received midi?"
+        android:visibility="gone"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/bluetooth_content_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:overScrollMode="never" />
+
 </com.zhy.autolayout.AutoLinearLayout>
