@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -19,6 +20,9 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
+import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_CHAR_ENABLE_WRITE;
+import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_DISCONNECTED;
+import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_IDLE;
 import static jp.kshoji.driver.midi.util.Constants.TAG;
 
 /**
@@ -32,7 +36,7 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
 
     private LayoutInflater mLayoutInflater;
 
-    String[] mDeviceStatus;
+    private static String[] sDeviceStatus;
 
     public BluetoothItemLinearLayoutAdapter(Context context, LayoutHelper helper, List<MyBluetoothDevice> devices) {
         mLayoutHelper = helper;
@@ -41,7 +45,7 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
 
         mLayoutInflater = LayoutInflater.from(context);
 
-        mDeviceStatus = context.getResources().getStringArray(R.array.bluetooth_status);
+        sDeviceStatus = context.getResources().getStringArray(R.array.bluetooth_status);
     }
 
     @Override
@@ -65,6 +69,13 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
         myViewHolder.mInfo.setText(devices.get(position).info);
 
         myViewHolder.mId.setText(devices.get(position).id);
+
+        if (devices.get(position).status == DEVICE_IDLE || devices.get(position).status == DEVICE_DISCONNECTED
+                ||  devices.get(position).status == DEVICE_CHAR_ENABLE_WRITE) {
+            myViewHolder.mSearchingProgressBar.setVisibility(View.INVISIBLE);
+        } else {
+            myViewHolder.mSearchingProgressBar.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -86,6 +97,8 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
 
         private TextView mId;
 
+        private ProgressBar mSearchingProgressBar;
+
         public MyViewHolder(View itemView) {
             super(itemView);
 
@@ -97,6 +110,8 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
 
             mId = (TextView) itemView.findViewById(R.id.item_id);
 
+            mSearchingProgressBar = (ProgressBar) itemView.findViewById(R.id.searching_progress);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -104,6 +119,7 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
                     BluetoothClickedEvent event = new BluetoothClickedEvent();
                     event.id = mId.getText().toString();
                     event.name = mName.getText().toString();
+                    event.status = getConnectedStatus(mStatus.getText().toString());
 
                     EventBus.getDefault().post(event);
                 }
@@ -111,11 +127,21 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
         }
     }
 
-    private String getDeviceStatus(int status) {
-        if (status >= mDeviceStatus.length || status < 0) {
+    private static String getDeviceStatus(int status) {
+        if (status >= sDeviceStatus.length || status < 0) {
             return "";
         }
 
-        return mDeviceStatus[status];
+        return sDeviceStatus[status];
+    }
+
+    private static int getConnectedStatus(String info) {
+        for (int i = 0; i < sDeviceStatus.length; i++) {
+            if (sDeviceStatus[i].equals(info)) {
+                return i;
+            }
+        }
+
+        return DEVICE_IDLE;
     }
 }

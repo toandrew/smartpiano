@@ -38,25 +38,33 @@
             android:textSize="12sp" />
     </LinearLayout>
 
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_arrow"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="9.0dp"-->
+        <!--android:src="@mipmap/usercenter_grey_arrow" />-->
 
-    <ImageView
-        android:id="@+id/iv_arrow"
+    <ProgressBar
+        android:id="@+id/searching_progress"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        style="?android:attr/progressBarStyleSmall"
         android:layout_centerVertical="true"
-        android:layout_marginRight="9.0dp"
-        android:src="@mipmap/usercenter_grey_arrow" />
+        android:layout_marginRight="5.0dp"/>
 
     <TextView
         android:id="@+id/item_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginRight="9.0dp"
+        android:layout_marginRight="5.0dp"
         android:textColor="@color/app_red"
-        android:textSize="22sp"
-        android:layout_toLeftOf="@id/iv_arrow"/>
+        android:textSize="14sp"
+        android:layout_toLeftOf="@id/searching_progress"/>
 
     <TextView
         android:id="@+id/item_id"
@@ -65,7 +73,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="9.0dp"
         android:textColor="@color/app_red"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:layout_toLeftOf="@id/item_status"
         android:visibility="invisible"/>
 </RelativeLayout>

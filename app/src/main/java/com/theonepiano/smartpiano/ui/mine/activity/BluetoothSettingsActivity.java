@@ -4,13 +4,13 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.theonepiano.smartpiano.R;
@@ -28,11 +28,13 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_DISCONNECTED;
+import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_IDLE;
 
 /**
  * Created by jim on 2017/7/18.
@@ -50,11 +52,10 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
     @BindView(R.id.stop_scan)
     Button mStopScanBtn;
 
+    @BindView(R.id.scanning_progress)
+    ProgressBar mScanningProgressBar;
+
     BluetoothDevicesAdapter mBluetoothDevicesAdapter;
-
-    private final Handler mHandler = new Handler();
-
-    private Runnable mDeviceScanRunnable;
 
     @Override
     protected int getLayoutId() {
@@ -103,11 +104,15 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
 
     @OnClick(R.id.start_scan)
     public void onStartScanClicked(View view) {
+        mScanningProgressBar.setVisibility(View.VISIBLE);
+
         mPresenter.startScan();
     }
 
     @OnClick(R.id.stop_scan)
     public void onStopScanClicked(View view) {
+        mScanningProgressBar.setVisibility(View.GONE);
+
         mPresenter.stopScan();
     }
 
@@ -135,39 +140,32 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
         super.onDestroy();
 
         mPresenter.stopScan();
-
-        mHandler.removeCallbacks(mDeviceScanRunnable);
     }
 
     @Override
     public void onDeviceUpdated(final List<MyBluetoothDevice> devices) {
         Log.w(TAG, "onDeviceUpdated![" + devices + "]!!!!");
 
-        if (mDeviceScanRunnable == null) {
-            mDeviceScanRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    if (mBluetoothDevicesAdapter == null) {
-                        RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-                        mContentView.setRecycledViewPool(viewPool);
-                        viewPool.setMaxRecycledViews(0, 10);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mBluetoothDevicesAdapter == null && !BluetoothSettingsActivity.this.isDestroyed()) {
+                    RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+                    mContentView.setRecycledViewPool(viewPool);
+                    viewPool.setMaxRecycledViews(0, 10);
 
-                        VirtualLayoutManager manager = new VirtualLayoutManager(BluetoothSettingsActivity.this);
-                        mContentView.setLayoutManager(manager);
+                    VirtualLayoutManager manager = new VirtualLayoutManager(BluetoothSettingsActivity.this);
+                    mContentView.setLayoutManager(manager);
 
-                        mBluetoothDevicesAdapter = new BluetoothDevicesAdapter(BluetoothSettingsActivity.this, manager);
-                    }
-
-                    mBluetoothDevicesAdapter.update(devices);
-
-                    if (mContentView != null) {
-                        mContentView.setAdapter(mBluetoothDevicesAdapter);
-                    }
+                    mBluetoothDevicesAdapter = new BluetoothDevicesAdapter(BluetoothSettingsActivity.this, manager);
                 }
-            };
-        }
 
-        mHandler.post(mDeviceScanRunnable);
+                if (mContentView != null && mBluetoothDevicesAdapter != null) {
+                    mBluetoothDevicesAdapter.update(devices);
+                    mContentView.setAdapter(mBluetoothDevicesAdapter);
+                }
+            }
+        });
     }
 
     @Override
@@ -178,6 +176,12 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
                 if (mStartScanBtn != null && mStopScanBtn != null) {
                     mStartScanBtn.setEnabled(!isScanning);
                     mStopScanBtn.setEnabled(isScanning);
+
+                    if (isScanning) {
+                        mScanningProgressBar.setVisibility(View.VISIBLE);
+                    } else {
+                        mScanningProgressBar.setVisibility(View.GONE);
+                    }
                 }
             }
         });
@@ -185,12 +189,12 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(BluetoothClickedEvent event) {
-        Log.w(TAG, "onMessageEvent[" + mPresenter.isBluetoothDeviceConnected() + "]id[" + event.id + "]name[" + event.name + "]");
+        Log.w(TAG, "onMessageEvent[" + mPresenter.isBluetoothDeviceConnected() + "]id[" + event.id + "]name[" + event.name + "]status[" + event.status + "]");
 
-        if (!mPresenter.isBluetoothDeviceConnected()) {
+        mPresenter.disconnect();
+
+        if (event.status == DEVICE_IDLE || event.status == DEVICE_DISCONNECTED) {
             mPresenter.connect(event.id, event.name);
-        } else {
-            mPresenter.disconnect();
         }
     }
 }

@@ -2,16 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="45.0dp"
-    android:background="@color/colorPrimary"
-    >
+    android:background="@color/colorPrimary">
+
     <ImageView
         android:id="@+id/img_back"
         android:layout_width="25.0dp"
         android:layout_height="25.0dp"
         android:layout_centerVertical="true"
-        android:src="@mipmap/img_back"
         android:layout_marginLeft="5.0dp"
-        />
+        android:src="@mipmap/img_back" />
 
     <Button
         android:id="@+id/start_scan"
@@ -19,9 +18,8 @@
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5.0dp"
-        android:text="start scan"
         android:layout_toRightOf="@id/img_back"
-        />
+        android:text="start scan" />
 
     <Button
         android:id="@+id/stop_scan"
@@ -29,19 +27,28 @@
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5.0dp"
-        android:text="stop scan"
         android:layout_toRightOf="@id/start_scan"
-        />
+        android:text="stop scan" />
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#ffffff"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:maxEms="6"
         android:layout_centerInParent="true"
-        />
+        android:ellipsize="end"
+        android:maxEms="6"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/scanning_progress"
+        style="?android:attr/progressBarStyleLargeInverse"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
 
 </RelativeLayout>

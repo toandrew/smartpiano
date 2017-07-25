@@ -10,12 +10,14 @@ import com.wanaka.ble.midi.BleMidiManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import jp.kshoji.blemidi.listener.OnMidiDeviceFoundListener;
 import jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener;
 import jp.kshoji.blemidi.listener.OnMidiScanStatusListener;
 
+import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_DISCONNECTED;
 import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_IDLE;
 import static jp.kshoji.driver.midi.util.Constants.TAG;
 
@@ -94,7 +96,6 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
                 for (MyBluetoothDevice m : mBluetoothDeviceList) {
                     if (m.id.equalsIgnoreCase(device.getAddress())) {
                         m.status = status;
-
                         Log.w(TAG, "device: " + device + "]status[ " + m.status + "]");
                     }
                 }
@@ -108,10 +109,7 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
      * reset all
      */
     private void reset() {
-        synchronized (mBluetoothDeviceList) {
-            mBluetoothDeviceList.clear();
-            mBluetoothDevicesHashMap.clear();
-        }
+        removeUselessDevices();
 
         mBleMidiManager.getInstance().setOnBluetoothDeviceFoundListener(null);
         mBleMidiManager.getInstance().setOnMidiScanStatusListener(null);
@@ -144,5 +142,21 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
                 mView.onDeviceUpdated(updateDevices(device, status));
             }
         });
+    }
+
+    /**
+     * remove all non-connected ble devices
+     */
+    private void removeUselessDevices() {
+        synchronized (mBluetoothDeviceList) {
+            Iterator<MyBluetoothDevice> it = mBluetoothDeviceList.iterator();
+            while (it.hasNext()) {
+                MyBluetoothDevice d = it.next();
+                if (d.status == DEVICE_IDLE || d.status == DEVICE_DISCONNECTED) {
+                    mBluetoothDevicesHashMap.remove(d.id.toLowerCase());
+                    it.remove();
+                }
+            }
+        }
     }
 }
