@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import jp.kshoji.blemidi.device.MidiInputDevice;
+import jp.kshoji.blemidi.listener.OnMidiDataListener;
 import jp.kshoji.blemidi.listener.OnMidiDeviceFoundListener;
 import jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener;
 import jp.kshoji.blemidi.listener.OnMidiScanStatusListener;
@@ -70,6 +72,11 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
     @Override
     public void disconnect() {
         mBleMidiManager.getInstance().disconnect();
+    }
+
+    @Override
+    public void sendMidiMessage(byte[] data) {
+        mBleMidiManager.getInstance().sendMsg(data);
     }
 
     private MyBluetoothDevice createMyBluetoothDevice(@NonNull BluetoothDevice device, int status) {
@@ -140,6 +147,14 @@ public class MineBluetoothPresenter extends MineBluetoothContract.Presenter {
             public void onDeviceStatusChanged(@NonNull BluetoothDevice device, int status) {
                 Log.w(TAG, "device:" + device + " status[" + status + "]");
                 mView.onDeviceUpdated(updateDevices(device, status));
+            }
+        });
+
+        mBleMidiManager.getInstance().setOnMidiDataListener(new OnMidiDataListener() {
+            @Override
+            public void onMidiData(MidiInputDevice device, byte[] data) {
+                Log.w(TAG, "onMidiData!!!!");
+                mView.onMidiDataReceived(data);
             }
         });
     }

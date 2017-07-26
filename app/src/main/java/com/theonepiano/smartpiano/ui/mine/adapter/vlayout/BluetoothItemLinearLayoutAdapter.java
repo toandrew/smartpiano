@@ -21,6 +21,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_CHAR_ENABLE_WRITE;
+import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_CHAR_RECV_DATA;
 import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_DISCONNECTED;
 import static jp.kshoji.blemidi.listener.OnMidiDeviceStatusListener.DEVICE_IDLE;
 import static jp.kshoji.driver.midi.util.Constants.TAG;
@@ -71,7 +72,8 @@ public class BluetoothItemLinearLayoutAdapter extends DelegateAdapter.Adapter<Bl
         myViewHolder.mId.setText(devices.get(position).id);
 
         if (devices.get(position).status == DEVICE_IDLE || devices.get(position).status == DEVICE_DISCONNECTED
-                ||  devices.get(position).status == DEVICE_CHAR_ENABLE_WRITE) {
+                ||  devices.get(position).status == DEVICE_CHAR_ENABLE_WRITE
+                || devices.get(position).status == DEVICE_CHAR_RECV_DATA) {
             myViewHolder.mSearchingProgressBar.setVisibility(View.INVISIBLE);
         } else {
             myViewHolder.mSearchingProgressBar.setVisibility(View.VISIBLE);

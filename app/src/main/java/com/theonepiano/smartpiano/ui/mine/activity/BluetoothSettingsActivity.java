@@ -60,7 +60,7 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
     Button mSendMidiEventBtn;
 
     @BindView(R.id.received_midi_event)
-    TextView mReceivedMidiEvent;
+    TextView mReceivedMidiEventTextView;
 
     BluetoothDevicesAdapter mBluetoothDevicesAdapter;
 
@@ -112,6 +112,8 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
     @OnClick(R.id.start_scan)
     public void onStartScanClicked(View view) {
         mScanningProgressBar.setVisibility(View.VISIBLE);
+        mReceivedMidiEventTextView.setVisibility(View.GONE);
+        mSendMidiEventBtn.setVisibility(View.GONE);
 
         mPresenter.startScan();
     }
@@ -125,6 +127,11 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
 
     @OnClick(R.id.send_midi_event)
     public void onSendMidiClicked(View view) {
+        mReceivedMidiEventTextView.setVisibility(View.GONE);
+
+        // send midi event: connect({ 0xF0, 0x00, 0x20, 0x2B, 0x69, 0x00, 0x00, 0x55, 0x79, 0xF7}  )
+        final byte[] data = { (byte)0xF0, 0x00, 0x20, 0x2B, 0x69, 0x00, 0x00, 0x55, 0x79, (byte)0xF7};
+        mPresenter.sendMidiMessage(data);
 
     }
 
@@ -177,7 +184,7 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
                     mContentView.setAdapter(mBluetoothDevicesAdapter);
                 }
 
-                updateMidiBtnStatus();
+                updateSendMidiBtnStatus();
             }
         });
     }
@@ -195,8 +202,27 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
                         mScanningProgressBar.setVisibility(View.VISIBLE);
                     } else {
                         mScanningProgressBar.setVisibility(View.GONE);
+
+                        updateSendMidiBtnStatus();
                     }
                 }
+            }
+        });
+    }
+
+    @Override
+    public void onMidiDataReceived(final byte[] data) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mReceivedMidiEventTextView.setVisibility(View.VISIBLE);
+
+                String s = String.format("收到的MIDI数据长度为 %d(", data.length);
+                for (int i = 0; i < data.length; ++i) {
+                    s += String.format("0x%x ", data[i]);
+                }
+                s += ")";
+                mReceivedMidiEventTextView.setText(s);
             }
         });
     }
@@ -211,16 +237,17 @@ public class BluetoothSettingsActivity extends BaseSwipeBackActivity<MineBluetoo
             mPresenter.connect(event.id, event.name);
         }
 
-        updateMidiBtnStatus();
+        updateSendMidiBtnStatus();
     }
 
-    private void updateMidiBtnStatus() {
+    /**
+     * Update midi send btn status
+     */
+    private void updateSendMidiBtnStatus() {
         if (mPresenter.isBluetoothDeviceConnected()) {
             mSendMidiEventBtn.setVisibility(View.VISIBLE);
-            mReceivedMidiEvent.setVisibility(View.VISIBLE);
         } else {
             mSendMidiEventBtn.setVisibility(View.GONE);
-            mReceivedMidiEvent.setVisibility(View.GONE);
         }
     }
 }
